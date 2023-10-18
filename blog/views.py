@@ -10,5 +10,5 @@ class BlogDetailView(DetailView):
     template_name = "post_detail.html"
 
     def get(self, request, *args, **kwargs):
-        print('BLA', self.kwargs.get('pk'))
+        # print('BLA', self.kwargs.get('pk'))
         return super().get(request, *args, **kwargs)
