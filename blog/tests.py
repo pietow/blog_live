@@ -46,3 +46,35 @@ class BlogTests(TestCase):
         no_response = self.client.get('/post/1000/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(no_response.status_code, 404)
+
+    def test_post_createview(self):
+        response = self.client.post(
+            reverse('post_new'),
+            {
+                "title": "New title",
+                "body": 'New text',
+                'author': self.user.id,
+            }
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "New title")
+        self.assertEqual(Post.objects.last().body, "New text")
+
+    def test_post_updateview(self):
+        response = self.client.post(
+            reverse("post_edit", args="1"),
+            {
+                "title": "Update title",
+                "body": "Update text",
+            }
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "Update title")
+        self.assertEqual(Post.objects.last().body, "Update text")
+
+    def test_post_deleteview(self):
+        response = self.client.post(reverse("post_delete", args="1"))
+        print(Post.objects.all())
+        self.assertEqual(response.status_code, 302)
+        self.assertIsNone(Post.objects.last())
