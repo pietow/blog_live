@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'blog.custom_user_middleware.SpecialUserMiddleware',
-    # 'blog.custom_user_middleware.ProtectSpecificRoutesMiddleware',
+    'blog.custom_user_middleware.ProtectSpecificRoutesMiddleware',
 ]
 
 ROOT_URLCONF = 'django_project.urls'
